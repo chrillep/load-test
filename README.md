@@ -21,6 +21,16 @@
     *   [hey install](#hey-install)
     *   [hey run](#hey-run)
 
+*   [locust](#locust)
+
+    *   [locust install](#locust-install)
+    *   [locust run](#locust-run)
+
+*   [k6](#k6)
+
+    *   [k6 install](#k6-install)
+    *   [k6 run](#k6-run)
+
 *   [Install all](#install-all)
 
 *   [Run all](#run-all)
@@ -75,8 +85,7 @@ brew install hey
 hey -n 400 -c 100 -t 2 <URL>
 ```
 
-## locust
-
+## [locust](https://locust.io/)
 
 ### locust install
 
@@ -85,11 +94,12 @@ brew install locust
 ```
 
 ### locust run
+
 ```sh
 locust --headless --users 10 --spawn-rate 1 -H <URL>
 ```
 
-## k6
+## [k6](https://k6.io/docs/getting-started/running-k6/)
 
 ### k6 install
 
@@ -98,6 +108,7 @@ brew install k6
 ```
 
 ### k6 run
+
 ```sh
 k6
 ```
