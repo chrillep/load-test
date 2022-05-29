@@ -96,7 +96,7 @@ brew install locust
 ### locust run
 
 ```sh
-locust --headless --users 10 --spawn-rate 1 -H <URL>
+locust -f locust/locustfile.py --headless --users 10 --spawn-rate 1 -H <URL>
 ```
 
 ## [k6](https://k6.io/docs/getting-started/running-k6/)
@@ -126,5 +126,5 @@ wrk -t12 -c400 -d30  --timeout 2s --latency <URL>
 ab -n 400 -c 100 -s 2 -t 30 -k <URL>
 siege -b -r 10 -c 40 <URL>
 hey -n 400 -c 100 -t 2 <URL>
-locust --headless --users 10 --spawn-rate 1 -H <URL>
+locust -f locust/locustfile.py --headless --users 10 --spawn-rate 1 -H <URL>
 ```
