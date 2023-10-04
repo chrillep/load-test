@@ -2,38 +2,25 @@
 
 ## Table of Contents
 
-*   [wrk](#wrk)
-
-    *   [wrk install](#wrk-install)
-    *   [wrk run](#wrk-run)
-
-*   [ab (Apache Bench)](#ab-apache-bench)
-
-    *   [ab run](#ab-run)
-
-*   [siege](#siege)
-
-    *   [siege install](#siege-install)
-    *   [siege run](#siege-run)
-
-*   [hey](#hey)
-
-    *   [hey install](#hey-install)
-    *   [hey run](#hey-run)
-
-*   [locust](#locust)
-
-    *   [locust install](#locust-install)
-    *   [locust run](#locust-run)
-
-*   [k6](#k6)
-
-    *   [k6 install](#k6-install)
-    *   [k6 run](#k6-run)
-
-*   [Install all](#install-all)
-
-*   [Run all](#run-all)
+* [wrk](#wrk)
+  * [wrk install](#wrk-install)
+  * [wrk run](#wrk-run)
+* [ab (Apache Bench)](#ab-apache-bench)
+  * [ab run](#ab-run)
+* [siege](#siege)
+  * [siege install](#siege-install)
+  * [siege run](#siege-run)
+* [hey](#hey)
+  * [hey install](#hey-install)
+  * [hey run](#hey-run)
+* [locust](#locust)
+  * [locust install](#locust-install)
+  * [locust run](#locust-run)
+* [k6](#k6)
+  * [k6 install](#k6-install)
+  * [k6 run](#k6-run)
+* [Install all](#install-all)
+* [Run all](#run-all)
 
 ## [wrk](https://github.com/wg/wrk)
 
