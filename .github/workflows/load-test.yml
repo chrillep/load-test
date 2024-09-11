@@ -94,35 +94,33 @@ jobs:
       - name: 'Load test url ${{ github.event.inputs.host }}'
         run: LOCUST_LOCUSTFILE=${{ github.event.inputs.locust_file }} LOCUST_HOST=${{ github.event.inputs.host }} LOCUST_USERS=${{ github.event.inputs.users }} LOCUST_SPAWN_RATE=${{ github.event.inputs.rate }} LOCUST_RUN_TIME=${{ github.event.inputs.runtime }} LOCUST_HEADLESS=true LOCUST_ONLY_SUMMARY=${{ github.event.inputs.summary }} docker compose -f locust/docker-compose.yml up --scale worker=${{ github.event.inputs.workers }} --abort-on-container-exit
 
-      - name: Upload HTML report
+      - name: Print CSV reports
+        if: always()
+        run: |
+          echo "### Load CSV test reports" >> $GITHUB_STEP_SUMMARY
+          echo "#### Stats" >> $GITHUB_STEP_SUMMARY
+          npx --yes --package=csv-to-markdown-table@latest -c 'csv-to-markdown-table --delim , --headers < locust/reports/report_stats.csv > report_stats.md'
+          cat report_stats.md >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "#### Exceptions" >> $GITHUB_STEP_SUMMARY
+          npx --yes --package=csv-to-markdown-table@latest -c 'csv-to-markdown-table --delim , --headers < locust/reports/report_exceptions.csv > report_exceptions.md'
+          cat report_exceptions.md >> $GITHUB_STEP_SUMMARY
+              echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "#### Failures" >> $GITHUB_STEP_SUMMARY
+          npx --yes --package=csv-to-markdown-table@latest -c 'csv-to-markdown-table --delim , --headers < locust/reports/report_failures.csv > report_failures.md'
+          cat report_failures.md >> $GITHUB_STEP_SUMMARY
+              echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "#### Stats history" >> $GITHUB_STEP_SUMMARY
+          npx --yes --package=csv-to-markdown-table@latest -c 'csv-to-markdown-table --delim , --headers < locust/reports/report_stats_history.csv > report_stats_history.md'
+          cat report_stats_history.md >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload reports
         if: always()
         uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4
         with:
           name: locust-report
           path: locust/reports
           retention-days: 10
-
-      - name: Print CSV reports
-        if: always()
-#        files
- #  report_exceptions.csv
-#  report_failures.csv
-#  report_stats_history.csv
-#  report_stats.csv
-        run: |
-          echo "### Load CSV test reports" >> $GITHUB_STEP_SUMMARY
-          echo "#### Exceptions" >> $GITHUB_STEP_SUMMARY
-          npx --yes --package=csv-to-markdown-table@latest -c 'csv-to-markdown-table --delim , --headers < locust/reports/report_exceptions.csv > report_exceptions.md'
-          cat report_exceptions.md >> $GITHUB_STEP_SUMMARY
-          echo "#### Failures" >> $GITHUB_STEP_SUMMARY
-          npx --yes --package=csv-to-markdown-table@latest -c 'csv-to-markdown-table --delim , --headers < locust/reports/report_failures.csv > report_failures.md'
-          cat report_failures.md >> $GITHUB_STEP_SUMMARY
-          echo "#### Stats history" >> $GITHUB_STEP_SUMMARY
-          npx --yes --package=csv-to-markdown-table@latest -c 'csv-to-markdown-table --delim , --headers < locust/reports/report_stats_history.csv > report_stats_history.md'
-          cat report_stats_history.md >> $GITHUB_STEP_SUMMARY
-          echo "#### Stats" >> $GITHUB_STEP_SUMMARY
-          npx --yes --package=csv-to-markdown-table@latest -c 'csv-to-markdown-table --delim , --headers < locust/reports/report_stats.csv > report_stats.md'
-          cat report_stats.md >> $GITHUB_STEP_SUMMARY
 
       - name: Print HTML report
         if: always()
