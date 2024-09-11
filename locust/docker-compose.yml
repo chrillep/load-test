@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  master:
+    image: locustio/locust
+    user: root
+    ports:
+      - "8089:8089"
+    volumes:
+      - ./:/mnt/locust
+    command: -f /mnt/locust/${LOCUST_LOCUSTFILE:-locustfile.py} --master
+    environment:
+      - LOCUST_LOCUSTFILE=${LOCUST_LOCUSTFILE:-locustfile.py}
+      - LOCUST_HOST=${LOCUST_HOST:-https://www.example.com}
+      - LOCUST_USERS=${LOCUST_USERS:-100}
+      - LOCUST_SPAWN_RATE=${LOCUST_SPAWN_RATE:-10}
+      - LOCUST_RUN_TIME=${LOCUST_RUN_TIME:-30s}
+      - LOCUST_HEADLESS=${LOCUST_HEADLESS:-false}
+      - LOCUST_ONLY_SUMMARY=${LOCUST_ONLY_SUMMARY:-false}
+      - LOCUST_PRINT_STATS=${LOCUST_PRINT_STATS:-false}
+      - LOCUST_HTML=${LOCUST_HTML:-/mnt/locust/reports/report.html}
+      - LOCUST_CSV=${LOCUST_CSV:-/mnt/locust/reports/report}
+      - LOCUST_CSV_FULL_HISTORY=${LOCUST_CSV_FULL_HISTORY:-true}
+      - ENVIRONMENT=${ENVIRONMENT:-staging}
+
+  worker:
+    image: locustio/locust
+    user: root
+    volumes:
+      - ./:/mnt/locust
+    command: -f /mnt/locust/${LOCUST_LOCUSTFILE:-locustfile.py} --worker --master-host master
