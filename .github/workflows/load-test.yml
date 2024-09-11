@@ -107,13 +107,17 @@ jobs:
         run: |
           echo "### Load CSV test reports" >> $GITHUB_STEP_SUMMARY
           echo "#### Exceptions" >> $GITHUB_STEP_SUMMARY
-          cat locust/reports/report_exceptions.csv >> $GITHUB_STEP_SUMMARY
+          npx --yes --package=csv-to-markdown-table@latest -c 'csv-to-markdown-table --delim , --headers < report_exceptions.csv > report_exceptions.md'
+          cat report_exceptions.md >> $GITHUB_STEP_SUMMARY
           echo "#### Failures" >> $GITHUB_STEP_SUMMARY
-          cat locust/reports/report_failures.csv >> $GITHUB_STEP_SUMMARY
+          npx --yes --package=csv-to-markdown-table@latest -c 'csv-to-markdown-table --delim , --headers < report_failures.csv > report_failures.md'
+          cat report_failures.md >> $GITHUB_STEP_SUMMARY
           echo "#### Stats history" >> $GITHUB_STEP_SUMMARY
-          cat locust/reports/report_stats_history.csv >> $GITHUB_STEP_SUMMARY
+          npx --yes --package=csv-to-markdown-table@latest -c 'csv-to-markdown-table --delim , --headers < report_stats_history.csv > report_stats_history.md'
+          cat report_stats_history.md >> $GITHUB_STEP_SUMMARY
           echo "#### Stats" >> $GITHUB_STEP_SUMMARY
-          cat locust/reports/report_stats.csv >> $GITHUB_STEP_SUMMARY
+          npx --yes --package=csv-to-markdown-table@latest -c 'csv-to-markdown-table --delim , --headers < report_stats.csv > report_stats.md'
+          cat report_stats.md >> $GITHUB_STEP_SUMMARY
 
       - name: Print HTML report
         if: always()
