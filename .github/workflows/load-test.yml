@@ -102,12 +102,10 @@ jobs:
           path: locust/reports
           retention-days: 10
 
-      - name: Print reports
+      - name: Print CSV reports
         if: always()
         run: |
-          echo "### Load test reports" >> $GITHUB_STEP_SUMMARY
-          echo "#### HTML report" >> $GITHUB_STEP_SUMMARY
-          cat locust/reports/report.html >> $GITHUB_STEP_SUMMARY
+          echo "### Load CSV test reports" >> $GITHUB_STEP_SUMMARY
           echo "#### Exceptions" >> $GITHUB_STEP_SUMMARY
           cat locust/reports/report_exceptions.csv >> $GITHUB_STEP_SUMMARY
           echo "#### Failures" >> $GITHUB_STEP_SUMMARY
@@ -116,3 +114,10 @@ jobs:
           cat locust/reports/report_stats_history.csv >> $GITHUB_STEP_SUMMARY
           echo "#### Stats" >> $GITHUB_STEP_SUMMARY
           cat locust/reports/report_stats.csv >> $GITHUB_STEP_SUMMARY
+
+      - name: Print HTML report
+        if: always()
+        run: |
+          echo "### Load HTML test reports" >> $GITHUB_STEP_SUMMARY
+          echo "#### HTML report" >> $GITHUB_STEP_SUMMARY
+          cat locust/reports/report.html >> $GITHUB_STEP_SUMMARY
