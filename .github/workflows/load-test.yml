@@ -92,7 +92,7 @@ jobs:
           fetch-depth: 0
 
       - name: 'Load test url ${{ github.event.inputs.host }}'
-        run: LOCUST_LOCUSTFILE=${{ github.event.inputs.locust_file }} LOCUST_HOST=${{ github.event.inputs.host }} LOCUST_USERS=${{ github.event.inputs.users }} LOCUST_SPAWN_RATE=${{ github.event.inputs.rate }} LOCUST_RUN_TIME=${{ github.event.inputs.runtime }} LOCUST_HEADLESS=true LOCUST_ONLY_SUMMARY=${{ github.event.inputs.summary }} docker-compose -f locust/docker-compose.yml up --scale worker=${{ github.event.inputs.workers }} --abort-on-container-exit
+        run: LOCUST_LOCUSTFILE=${{ github.event.inputs.locust_file }} LOCUST_HOST=${{ github.event.inputs.host }} LOCUST_USERS=${{ github.event.inputs.users }} LOCUST_SPAWN_RATE=${{ github.event.inputs.rate }} LOCUST_RUN_TIME=${{ github.event.inputs.runtime }} LOCUST_HEADLESS=true LOCUST_ONLY_SUMMARY=${{ github.event.inputs.summary }} docker compose -f locust/docker-compose.yml up --scale worker=${{ github.event.inputs.workers }} --abort-on-container-exit
 
       - name: Upload HTML report
         if: always()
