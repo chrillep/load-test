@@ -2,7 +2,7 @@ version: '3'
 
 services:
   master:
-    image: locustio/locust
+    image: locustio/locust@sha256:aace7624daa62d895d616f5ccc861a486c742582e1445a1d52d3aae83bbaa614
     user: root
     ports:
       - "8089:8089"
@@ -24,7 +24,7 @@ services:
       - ENVIRONMENT=${ENVIRONMENT:-staging}
 
   worker:
-    image: locustio/locust
+    image: locustio/locust@sha256:aace7624daa62d895d616f5ccc861a486c742582e1445a1d52d3aae83bbaa614
     user: root
     volumes:
       - ./:/mnt/locust
