@@ -1,84 +1,56 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "labels": [
-    "dependencies"
-  ],
-  "baseBranchPatterns": [
-    "main"
-  ],
-  "commitMessageAction": "⬆️ Bump",
   "extends": [
     "config:best-practices",
     "schedule:weekly",
-    ":dependencyDashboard"
+    ":semanticCommits",
+    ":semanticCommitTypeAll(chore)",
+    ":semanticCommitScope(deps)",
+    ":automergeMinor"
   ],
-  "commitMessageTopic": "{{depName}}",
   "forkProcessing": "enabled",
+  "commitMessageAction": "⬆️ Bump",
+  "commitMessageTopic": "{{depName}}",
   "packageRules": [
     {
-      "matchCategories": [
-        "php"
-      ],
-      "addLabels": [
-        "php"
-      ]
+      "matchCategories": ["php"],
+      "addLabels": ["php"]
     },
     {
-      "matchCategories": [
-        "js"
-      ],
-      "addLabels": [
-        "javascript"
-      ]
+      "matchCategories": ["js"],
+      "addLabels": ["javascript"]
     },
     {
-      "matchUpdateTypes": [
-        "major",
-        "minor",
-        "patch",
-        "pin"
-      ]
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"]
     },
     {
-      "matchManagers": [
-        "npm"
-      ],
-      "addLabels": [
-        "npm"
-      ]
+      "matchManagers": ["npm"],
+      "addLabels": ["npm"]
     },
     {
-      "matchManagers": [
-        "composer"
-      ],
-      "addLabels": [
-        "composer"
-      ],
+      "matchManagers": ["composer"],
+      "addLabels": ["composer"],
       "rangeStrategy": "bump"
     },
     {
-      "matchUpdateTypes": [
-        "major"
-      ],
-      "addLabels": [
-        "major"
-      ]
+      "matchUpdateTypes": ["major"],
+      "addLabels": ["major"]
     },
     {
-      "matchUpdateTypes": [
-        "minor"
-      ],
-      "addLabels": [
-        "minor"
-      ]
+      "matchUpdateTypes": ["minor"],
+      "addLabels": ["minor"]
     },
     {
-      "matchUpdateTypes": [
-        "patch"
-      ],
-      "addLabels": [
-        "patch"
-      ]
+      "matchUpdateTypes": ["patch"],
+      "addLabels": ["patch"]
+    },
+    {
+      "matchDepTypes": ["action"],
+      "pinDigests": false
+    },
+    {
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "pinDigests": false
     }
   ],
   "timezone": "Europe/Stockholm"
