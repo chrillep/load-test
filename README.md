@@ -86,7 +86,7 @@ brew install locust
 locust -f locust/locustfile.py --headless --users 10 --spawn-rate 1 -H <URL>
 ```
 
-## [k6](https://k6.io/docs/getting-started/running-k6/)
+## [k6](https://k6.io/docs/get-started/running-k6/)
 
 ### k6 install
 
