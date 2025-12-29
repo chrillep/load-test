@@ -97,7 +97,7 @@ brew install k6
 ### k6 run
 
 ```sh
-k6
+k6 run k6/script.js -e TARGET_URL=<URL>
 ```
 
 ## Install all
@@ -114,4 +114,5 @@ ab -n 400 -c 100 -s 2 -t 30 -k <URL>
 siege -b -r 10 -c 40 <URL>
 hey -n 400 -c 100 -t 2 <URL>
 locust -f locust/locustfile.py --headless --users 10 --spawn-rate 1 -H <URL>
+k6 run k6/script.js -e TARGET_URL=<URL>
 ```
